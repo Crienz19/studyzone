@@ -4183,6 +4183,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_admin_transaction_CheckOutModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/admin/transaction/CheckOutModal.vue */ "./resources/js/components/admin/transaction/CheckOutModal.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4257,6 +4258,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
   data: function data() {
@@ -4317,6 +4323,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: 'Date Transacted',
         align: 'center',
         value: 'created_at'
+      }, {
+        text: 'Actions',
+        align: 'center',
+        value: 'actions'
       }],
       fields: {
         'Type': 'type',
@@ -41633,6 +41643,21 @@ var render = function() {
                               [_vm._v(_vm._s(item.status))]
                             )
                           : _vm._e()
+                      ]
+                    }
+                  },
+                  {
+                    key: "item.actions",
+                    fn: function(ref) {
+                      var item = ref.item
+                      return [
+                        item.status == "CLOCKED IN"
+                          ? _c("check-out-modal", {
+                              attrs: { transaction: item }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("label", [_vm._v("Not Applicable")])
                       ]
                     }
                   }
