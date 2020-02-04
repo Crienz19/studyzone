@@ -62,7 +62,7 @@
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <check-out-modal v-if="item.status == 'CLOCKED IN'" :transaction="item" />
-                        <label>Not Applicable</label>
+                        <label v-if="item.status == 'CLOCKED OUT'">Not Applicable</label>
                     </template>
                 </v-data-table>
             </v-card>
