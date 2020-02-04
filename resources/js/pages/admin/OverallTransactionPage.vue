@@ -71,7 +71,7 @@
 </template>
 
 <script>
-    import CheckOutModal from '@/components/admin/transaction/CheckOutModal.vue';
+    import CheckOutModal from '@/components/admin/overall/CheckOutModal.vue';
     export default {
         layout: 'admin',
         components: {
