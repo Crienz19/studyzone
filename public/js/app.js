@@ -4265,6 +4265,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   layout: 'admin',
+  components: {
+    CheckOutModal: _components_admin_transaction_CheckOutModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       headers: [{
