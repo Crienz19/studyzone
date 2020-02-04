@@ -74,6 +74,9 @@
     import CheckOutModal from '@/components/admin/transaction/CheckOutModal.vue';
     export default {
         layout: 'admin',
+        components: {
+            CheckOutModal
+        },
         data () {
             return {
                 headers: [
