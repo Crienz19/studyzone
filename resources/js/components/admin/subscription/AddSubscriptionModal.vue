@@ -22,7 +22,7 @@
                     </v-col>
                     <v-col cols="12">
                         <v-select
-                            :items="space"
+                            :items="space.data"
                             v-model="form.subscription_space"
                             item-text="name"
                             item-value="id"

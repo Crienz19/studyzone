@@ -70,6 +70,20 @@ const transaction = {
         },
         async addTransaction({ commit }, transaction) {
             commit('ADD_TRANSACTION', transaction)
+        },
+        async deleteTransaction({ dispatch }, id) {
+            return new Promise((resolve, reject) => {
+                axios.get(`/api/admin/deleteTransaction/${id}`)
+                    .then((response) => {
+                        dispatch('loadOverallTransaction');
+                        resolve({
+                            'message': 'Transaction Loaded'
+                        })
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
         }
     }
 }

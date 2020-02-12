@@ -70,4 +70,13 @@ class AdminController extends Controller
             'message'   =>  'You extend the time with '. $request->input('hours') . ' hrs.'
         ];
     }
+
+    public function deleteTransaction($id)
+    {
+        Transaction::find($id)->delete();
+
+        return response()->json([
+            'message'   =>  'Transaction Deleted!'
+        ], 200);
+    }
 }

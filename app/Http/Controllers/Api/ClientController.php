@@ -18,6 +18,15 @@ class ClientController extends Controller
         $this->middleware('auth:api');
     }
 
+    public function deleteTransaction($id)
+    {
+        Transaction::find($id)->delete();
+
+        return response()->json([
+            'message'   =>  'Transaction Deleted!'
+        ], 200);
+    }
+
     public function addTransaction(Request $request)
     {
         $dt = \Carbon\Carbon::now()->setTimezone('Asia/Manila');

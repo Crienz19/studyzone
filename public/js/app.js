@@ -4474,7 +4474,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
 
     return mounted;
-  }()
+  }(),
+  methods: {
+    deleteTransaction: function () {
+      var _deleteTransaction = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.$store.dispatch('transaction/deleteTransaction', id);
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function deleteTransaction(_x) {
+        return _deleteTransaction.apply(this, arguments);
+      }
+
+      return deleteTransaction;
+    }()
+  }
 });
 
 /***/ }),
@@ -40015,7 +40042,7 @@ var render = function() {
                     [
                       _c("v-select", {
                         attrs: {
-                          items: _vm.space,
+                          items: _vm.space.data,
                           "item-text": "name",
                           "item-value": "id",
                           label: "Subscription Space",
@@ -41891,9 +41918,18 @@ var render = function() {
                             })
                           : _vm._e(),
                         _vm._v(" "),
-                        item.status == "CLOCKED OUT"
-                          ? _c("label", [_vm._v("Not Applicable")])
-                          : _vm._e()
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: { small: "", color: "error" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteTransaction(item.id)
+                              }
+                            }
+                          },
+                          [_vm._v("delete")]
+                        )
                       ]
                     }
                   }
@@ -103918,6 +103954,41 @@ var transaction = {
       }
 
       return addTransaction;
+    }(),
+    deleteTransaction: function () {
+      var _deleteTransaction = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref4, id) {
+        var dispatch;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                dispatch = _ref4.dispatch;
+                return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                  axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/admin/deleteTransaction/".concat(id)).then(function (response) {
+                    dispatch('loadOverallTransaction');
+                    resolve({
+                      'message': 'Transaction Loaded'
+                    });
+                  })["catch"](function (error) {
+                    reject(error);
+                  });
+                }));
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function deleteTransaction(_x3, _x4) {
+        return _deleteTransaction.apply(this, arguments);
+      }
+
+      return deleteTransaction;
     }()
   }
 };

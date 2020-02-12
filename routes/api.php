@@ -22,6 +22,7 @@ Route::prefix('admin')->group(function () {
    Route::get('/getOverallTransactions', 'Api\AdminController@getOverallTransactions');
    Route::post('/clockOut/{id}', 'Api\AdminController@clockMeOut');
    Route::post('/addTime/{id}', 'Api\AdminController@addTime');
+   Route::get('/deleteTransaction/{id}', 'Api\AdminController@deleteTransaction');
 });
 
 Route::prefix('space')->group(function () {

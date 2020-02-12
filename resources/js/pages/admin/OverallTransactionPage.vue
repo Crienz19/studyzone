@@ -62,7 +62,7 @@
                     </template>
                     <template v-slot:item.actions="{ item }">
                         <check-out-modal v-if="item.status == 'CLOCKED IN'" :transaction="item" />
-                        <label v-if="item.status == 'CLOCKED OUT'">Not Applicable</label>
+                        <v-btn small color="error" @click="deleteTransaction(item.id)">delete</v-btn>
                     </template>
                 </v-data-table>
             </v-card>
@@ -122,5 +122,10 @@
         async mounted() {
             await this.$store.dispatch('transaction/loadOverallTransaction');
         },
+        methods: {
+            async deleteTransaction (id) {
+                await this.$store.dispatch('transaction/deleteTransaction', id);
+            }
+        }
     }
 </script>
