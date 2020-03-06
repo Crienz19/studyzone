@@ -80,7 +80,8 @@
         data () {
             return {
                 headers: [
-                    { text: 'Type', align: 'left', value: 'type'},
+                    { text: 'ID', align: 'left', value: 'id' },
+                    { text: 'Type', align: 'center', value: 'type'},
                     { text: 'Name', align: 'center', value: 'user.name'},
                     { text: 'Space', align: 'center', value: 'space.name' },
                     { text: 'Rate', align: 'center', value: 'space.rate' },

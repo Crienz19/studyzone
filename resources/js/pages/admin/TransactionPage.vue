@@ -100,7 +100,6 @@
         data () {
             return {
                 headers: [
-                    { text: 'ID', align: 'left', value: 'id' },
                     { text: 'Type', align: 'center', value: 'type'},
                     { text: 'Name', align: 'center', value: 'user.name'},
                     { text: 'Space', align: 'center', value: 'space.name' },
