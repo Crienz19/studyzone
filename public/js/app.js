@@ -4367,8 +4367,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       headers: [{
-        text: 'Type',
+        text: 'ID',
         align: 'left',
+        value: 'id'
+      }, {
+        text: 'Type',
+        align: 'center',
         value: 'type'
       }, {
         text: 'Name',
@@ -4978,10 +4982,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       headers: [{
-        text: 'ID',
-        align: 'left',
-        value: 'id'
-      }, {
         text: 'Type',
         align: 'center',
         value: 'type'
