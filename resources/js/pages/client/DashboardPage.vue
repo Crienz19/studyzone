@@ -96,7 +96,7 @@
             </v-card>
         </v-col>
         <v-col cols="12" md="5" lg="3" v-if="step == 3">
-            <v-card class="login-box-transparent">
+            <v-card :loading="loading.wd" :disabled="loading.wd" class="login-box-transparent">
                 <v-card-title>
                     <h3>SELECT PLAN</h3>
                     <v-spacer></v-spacer>
@@ -147,7 +147,7 @@
             </v-card>
         </v-col>
         <v-col cols="12" md="5" lg="3" v-if="step == 4">
-            <v-card class="login-box-transparent">
+            <v-card :loading="loading.dc" :disabled="loading.dc"  class="login-box-transparent">
                 <v-card-title>
                     <h3>Discount Card</h3>
                     <v-spacer></v-spacer>
@@ -199,7 +199,11 @@
                     control_no: '',
                     discount: false,
                 },
-                step: 1
+                step: 1,
+                loading: {
+                    dc: false,
+                    wd: false
+                }
             }
         },
         computed: {
@@ -258,12 +262,14 @@
                 if (this.form.discount) {
                     this.step += 1;
                 } else {
+                    this.loading.wd = true;
                     await this.$axios.post('/api/client/addTransaction', this.form, {
                             headers: {
                                 Authorization: `Bearer ${localStorage.getItem('access_token')}`
                             }
                         })
                         .then((response) => {
+                            this.loading.wd = false;
                             localStorage.removeItem('access_token');
                             this.$router.push('/auth/login');
                             this.$swal.fire({
@@ -272,6 +278,7 @@
                             })
                         })
                         .catch(error => {
+                            this.loading.wd = false;
                             console.log(error.response.data);
                             this.$swal.fire({
                                 type: 'error',
@@ -281,12 +288,14 @@
                 }
             },
             async clockMeInNow () {
+                this.loading.dc = true;
                 await this.$axios.post('/api/client/addTransaction', this.form, {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('access_token')}`
                         }
                     })
                     .then((response) => {
+                        this.loading.dc = false;
                         localStorage.removeItem('access_token');
                         this.$router.push('/auth/login');
                         this.$swal.fire({
@@ -295,6 +304,7 @@
                         })
                     })
                     .catch(error => {
+                        this.loading.dc = false;
                         console.log(error.response.data);
                         this.$swal.fire({
                                 type: 'error',

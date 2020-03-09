@@ -59,11 +59,12 @@ class AdminController extends Controller
         ]);
 
         $transaction = Transaction::find($id);
-
+        $subtotal = $transaction->sub_total + (Space::find($transaction->space_id)->rate * $request->input('hours'));
         $transaction->update([
             'end'       =>  Carbon::parse($transaction->end)->addHours($request->input('hours')),
             'duration'  =>  $transaction->duration + $request->input('hours'),
-            'sub_total' =>  $transaction->sub_total + (Space::find($transaction->space_id)->rate * $request->input('hours'))
+            'sub_total' =>  $subtotal,
+            'total'     =>  $subtotal - (($transaction->discount / 100) * $subtotal)
         ]);
 
         return [

@@ -50,7 +50,7 @@
                 {{ notif.user.name }} is has ended his/her session.
             </v-alert>
 
-            <v-card>
+            <v-card :loading="loading" :disabled="loading">
                 <v-card-title>
                     <h3>Transactions</h3>
                     <v-spacer></v-spacer>
@@ -121,7 +121,8 @@
                 form: {
                     discount: ''
                 },
-                search: ''
+                search: '',
+                loading: false
             }
         },
         computed: {
@@ -130,7 +131,9 @@
             }
         },
         async mounted () {
-            await this.$store.dispatch('transaction/loadTransaction')
+            this.loading = true;
+            await this.$store.dispatch('transaction/loadTransaction');
+            this.loading = false;
         }
     }
 </script>

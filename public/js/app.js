@@ -3684,7 +3684,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: 'Actions',
         align: 'center',
         value: 'actions'
-      }]
+      }],
+      loading: false
     };
   },
   computed: {
@@ -3700,10 +3701,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('card/loadCards');
 
-            case 2:
+            case 3:
+              this.loading = false;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -4082,7 +4087,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: 'Actions',
         align: 'center',
         value: 'actions'
-      }]
+      }],
+      loading: false
     };
   },
   computed: {
@@ -4094,16 +4100,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _mounted = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var _this = this;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('service/loadServices').then(function (response) {
                 console.log(response);
+                _this.loading = false;
               });
 
-            case 2:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -4231,7 +4241,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'Quantity': 'quantity',
         'Total': 'total',
         'Date Transacted': 'created_at'
-      }
+      },
+      loading: false
     };
   },
   computed: {
@@ -4247,10 +4258,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('service/loadOverallServices');
 
-            case 2:
+            case 3:
+              this.loading = false;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -4286,7 +4301,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
 //
 //
 //
@@ -4446,7 +4460,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         'Total': 'total',
         'Status': 'status',
         'Date Transacted': 'created_at'
-      }
+      },
+      dates: {
+        start_date: '2020-01-21',
+        end_date: '2020-01-23'
+      },
+      loading: false
     };
   },
   computed: {
@@ -4462,10 +4481,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('transaction/loadOverallTransaction');
 
-            case 2:
+            case 3:
+              this.loading = false;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -4484,14 +4507,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _deleteTransaction = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(id) {
+        var message;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                message = confirm('Are you sure?');
+
+                if (!message) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.loading = true;
+                _context2.next = 5;
                 return this.$store.dispatch('transaction/deleteTransaction', id);
 
-              case 2:
+              case 5:
+                this.loading = false;
+
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -4612,7 +4647,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         daily_rate: 0,
         weekly_rate: 0,
         monthly_rate: 0
-      }
+      },
+      loading: false
     };
   },
   computed: {
@@ -4628,10 +4664,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('space/loadSpaces');
 
-            case 2:
+            case 3:
+              this.loading = false;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -4825,7 +4865,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         text: 'Status',
         align: 'center',
         value: 'status'
-      }]
+      }],
+      loading: false
     };
   },
   computed: {
@@ -4841,10 +4882,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('subscription/loadSubscriptions');
 
-            case 2:
+            case 3:
+              this.loading = false;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -5044,7 +5089,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: {
         discount: ''
       },
-      search: ''
+      search: '',
+      loading: false
     };
   },
   computed: {
@@ -5060,10 +5106,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.loading = true;
+              _context.next = 3;
               return this.$store.dispatch('transaction/loadTransaction');
 
-            case 2:
+            case 3:
+              this.loading = false;
+
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -5813,7 +5863,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         control_no: '',
         discount: false
       },
-      step: 1
+      step: 1,
+      loading: {
+        dc: false,
+        wd: false
+      }
     };
   },
   computed: {
@@ -5929,16 +5983,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 this.step += 1;
-                _context3.next = 6;
+                _context3.next = 7;
                 break;
 
               case 4:
-                _context3.next = 6;
+                this.loading.wd = true;
+                _context3.next = 7;
                 return this.$axios.post('/api/client/addTransaction', this.form, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem('access_token'))
                   }
                 }).then(function (response) {
+                  _this2.loading.wd = false;
                   localStorage.removeItem('access_token');
 
                   _this2.$router.push('/auth/login');
@@ -5948,6 +6004,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     title: 'Transaction Added.'
                   });
                 })["catch"](function (error) {
+                  _this2.loading.wd = false;
                   console.log(error.response.data);
 
                   _this2.$swal.fire({
@@ -5956,7 +6013,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 6:
+              case 7:
               case "end":
                 return _context3.stop();
             }
@@ -5980,12 +6037,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
+                this.loading.dc = true;
+                _context4.next = 3;
                 return this.$axios.post('/api/client/addTransaction', this.form, {
                   headers: {
                     Authorization: "Bearer ".concat(localStorage.getItem('access_token'))
                   }
                 }).then(function (response) {
+                  _this3.loading.dc = false;
                   localStorage.removeItem('access_token');
 
                   _this3.$router.push('/auth/login');
@@ -5995,6 +6054,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     title: 'Transaction Added.'
                   });
                 })["catch"](function (error) {
+                  _this3.loading.dc = false;
                   console.log(error.response.data);
 
                   _this3.$swal.fire({
@@ -6003,7 +6063,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   });
                 });
 
-              case 2:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -41064,6 +41124,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
@@ -41430,6 +41491,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
@@ -41650,6 +41712,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
@@ -41863,19 +41926,26 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
                 [
-                  _vm._v(
-                    "\n                Overall Transactions\n                "
-                  ),
                   _c("v-spacer"),
                   _vm._v(" "),
                   _c(
                     "download-excel",
-                    { attrs: { data: _vm.transactions, fields: _vm.fields } },
-                    [_vm._v("\n                    Download\n                ")]
+                    {
+                      attrs: {
+                        data: _vm.filteredTransactions,
+                        fields: _vm.fields
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Export Report\n                "
+                      )
+                    ]
                   )
                 ],
                 1
@@ -41992,6 +42062,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
@@ -42243,6 +42314,7 @@ var render = function() {
         [
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
@@ -42503,6 +42575,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-card",
+            { attrs: { loading: _vm.loading, disabled: _vm.loading } },
             [
               _c(
                 "v-card-title",
@@ -43661,7 +43734,10 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { staticClass: "login-box-transparent" },
+                {
+                  staticClass: "login-box-transparent",
+                  attrs: { loading: _vm.loading.wd, disabled: _vm.loading.wd }
+                },
                 [
                   _c(
                     "v-card-title",
@@ -43845,7 +43921,10 @@ var render = function() {
             [
               _c(
                 "v-card",
-                { staticClass: "login-box-transparent" },
+                {
+                  staticClass: "login-box-transparent",
+                  attrs: { loading: _vm.loading.dc, disabled: _vm.loading.dc }
+                },
                 [
                   _c(
                     "v-card-title",
@@ -103896,6 +103975,16 @@ var transaction = {
       return state.transactions.filter(function (transaction) {
         return transaction.status == 'CLOCKED IN';
       }).length;
+    },
+    GET_TRANSACTIONS_BY_DATE: function GET_TRANSACTIONS_BY_DATE(state) {
+      return function (dates) {
+        var start_date = new Date(dates.start_date).toDateString();
+        var end_date = new Date(dates.end_date).toDateString();
+        return state.transactions.filter(function (t) {
+          var date = new Date(t.created_at).toDateString();
+          return date >= start_date && date <= end_date;
+        });
+      };
     }
   },
   mutations: {

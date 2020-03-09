@@ -40,7 +40,7 @@
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card>
+            <v-card :loading="loading" :disabled="loading">
                 <v-card-title>
                     <h3>Subscription</h3>
                     <v-spacer></v-spacer>
@@ -81,7 +81,8 @@
                     { text: 'Date Expired', align: 'center', value: 'date_expired' },
                     { text: 'Price', align: 'center', value: 'price' },
                     { text: 'Status', align: 'center', value: 'status' },
-                ]
+                ],
+                loading: false
             }
         },
         computed: {
@@ -90,7 +91,9 @@
             }
         },
         async mounted() {
+            this.loading = true;
             await this.$store.dispatch('subscription/loadSubscriptions')
+            this.loading = false;
         },
     }
 </script>

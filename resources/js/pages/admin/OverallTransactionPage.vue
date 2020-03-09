@@ -40,15 +40,14 @@
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card>
+            <v-card :loading="loading" :disabled="loading">
                 <v-card-title>
-                    Overall Transactions
                     <v-spacer></v-spacer>
                     <download-excel
-                        :data="transactions"
+                        :data="filteredTransactions"
                         :fields="fields"
                     >
-                        Download
+                        Export Report
                     </download-excel>
                 </v-card-title>
                 <v-data-table
@@ -112,7 +111,12 @@
                     'Total': 'total',
                     'Status': 'status',
                     'Date Transacted': 'created_at'
-                }
+                },
+                dates: {
+                    start_date: '2020-01-21',
+                    end_date: '2020-01-23'
+                },
+                loading: false
             }
         },
         computed: {
@@ -121,11 +125,18 @@
             }
         },
         async mounted() {
+            this.loading = true;
             await this.$store.dispatch('transaction/loadOverallTransaction');
+            this.loading = false;
         },
         methods: {
             async deleteTransaction (id) {
-                await this.$store.dispatch('transaction/deleteTransaction', id);
+                let message = confirm('Are you sure?');
+                if (message) {
+                    this.loading = true;
+                    await this.$store.dispatch('transaction/deleteTransaction', id);
+                    this.loading = false;
+                }
             }
         }
     }

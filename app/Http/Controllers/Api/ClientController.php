@@ -52,6 +52,7 @@ class ClientController extends Controller
                             if ($card->first()->status) {
                                 switch ($request->input('plan')) {
                                     case 'HP':
+                                        $subtotal = Space::where('id', $request->input('space_id'))->first()->rate * $request->input('duration');
                                         $transaction = Transaction::create([
                                             'user_id'   =>  auth()->user()->id,
                                             'pager_no'  =>  Transaction::whereDate('created_at', $dt->toDateString())->count() == 0 ? 1 : Transaction::whereDate('created_at', $dt->toDateString())->count() + 1,
@@ -60,9 +61,9 @@ class ClientController extends Controller
                                             'duration'  =>  $request->input('duration'),
                                             'start'     =>  $dt->toDateTimeString(),
                                             'end'       =>  $dt->addHours($request->input('duration')),
-                                            'sub_total' =>  Space::where('id', $request->input('space_id'))->first()->rate * $request->input('duration'),
+                                            'sub_total' =>  $subtotal,
                                             'discount'  =>  $card->first()->discount,
-                                            'total'     =>  0,
+                                            'total'     =>  $subtotal - (($card->first()->discount / 100) * $subtotal),
                                             'status'    =>  'CLOCKED IN',
                                             'type'      =>  'REGULAR'
                                         ]);
@@ -71,7 +72,8 @@ class ClientController extends Controller
                                         break;
 
                                     case 'DP':
-                                        Transaction::create([
+                                        $subtotal = Space::where('id', $request->input('space_id'))->first()->daily_rate;
+                                        $transaction = Transaction::create([
                                             'user_id'   =>  auth()->user()->id,
                                             'pager_no'  =>  'N/A',
                                             'space_id'  =>  $request->input('space_id'),
@@ -79,12 +81,14 @@ class ClientController extends Controller
                                             'duration'  =>  $request->input('duration'),
                                             'start'     =>  $dt->toDateTimeString(),
                                             'end'       =>  '',
-                                            'sub_total' =>  Space::where('id', $request->input('space_id'))->first()->daily_rate,
+                                            'sub_total' =>  $subtotal,
                                             'discount'  =>  $card->first()->discount,
-                                            'total'     =>  0,
+                                            'total'     =>  $subtotal - (($card->first()->discount / 100) * $subtotal),
                                             'status'    =>  'CLOCKED IN',
                                             'type'      =>  'REGULAR'
                                         ]);
+
+                                        event(new NewTransactionAdded($transaction->format()));
                                         break;
                                 }
 
@@ -109,6 +113,7 @@ class ClientController extends Controller
                 } else {
                     switch ($request->input('plan')) {
                         case 'HP':
+                            $subtotal = Space::where('id', $request->input('space_id'))->first()->rate * $request->input('duration');
                             $transaction = Transaction::create([
                                 'user_id'   =>  auth()->user()->id,
                                 'space_id'  =>  $request->input('space_id'),
@@ -117,17 +122,18 @@ class ClientController extends Controller
                                 'duration'  =>  $request->input('duration'),
                                 'start'     =>  $dt->toDateTimeString(),
                                 'end'       =>  $dt->addHours($request->input('duration')),
-                                'sub_total' =>  Space::where('id', $request->input('space_id'))->first()->rate * $request->input('duration'),
+                                'sub_total' =>  $subtotal,
                                 'discount'  =>  0,
-                                'total'     =>  0,
+                                'total'     =>  $subtotal,
                                 'status'    =>  'CLOCKED IN',
                                 'type'      =>  'REGULAR'
                             ]);
 
-                            event(new NewTransactionAdded($transaction->format()));
+                            // event(new NewTransactionAdded($transaction->format()));
                             break;
 
                         case 'DP':
+                            $subtotal = Space::where('id', $request->input('space_id'))->first()->daily_rate;
                             $transaction = Transaction::create([
                                 'user_id'   =>  auth()->user()->id,
                                 'space_id'  =>  $request->input('space_id'),
@@ -136,9 +142,9 @@ class ClientController extends Controller
                                 'duration'  =>  $request->input('duration'),
                                 'start'     =>  $dt->toDateTimeString(),
                                 'end'       =>  '',
-                                'sub_total' =>  Space::where('id', $request->input('space_id'))->first()->daily_rate,
+                                'sub_total' =>  $subtotal,
                                 'discount'  =>  0,
-                                'total'     =>  0,
+                                'total'     =>  $subtotal,
                                 'status'    =>  'CLOCKED IN',
                                 'type'      =>  'REGULAR'
                             ]);

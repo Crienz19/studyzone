@@ -28,7 +28,17 @@ const transaction = {
             return pax;
         },
         GET_TOTAL_LOGGED_CLIENT (state) {
-            return state.transactions.filter(transaction => transaction.status == 'CLOCKED IN').length
+            return state.transactions.filter(transaction => transaction.status == 'CLOCKED IN').length;
+        },
+        GET_TRANSACTIONS_BY_DATE: (state) => (dates) => {
+            let start_date = new Date(dates.start_date).toDateString();
+            let end_date = new Date(dates.end_date).toDateString();
+
+            return state.transactions.filter((t) => {
+                let date = new Date(t.created_at).toDateString();
+                return date >= start_date && date <= end_date;
+            })
+
         }
     },
     mutations: {

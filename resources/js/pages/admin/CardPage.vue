@@ -40,7 +40,7 @@
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card>
+            <v-card :loading="loading" :disabled="loading">
                 <v-card-title>
                     Card List
                     <v-spacer></v-spacer>
@@ -85,7 +85,8 @@
                     { text: 'Price', align: 'center', value: 'price' },
                     { text: 'Status', align: 'center', value: 'status' },
                     { text: 'Actions', align: 'center', value: 'actions' }
-                ]
+                ],
+                loading: false
             }
         },
         computed: {
@@ -94,7 +95,9 @@
             }
         },
         async mounted () {
+            this.loading = true;
             await this.$store.dispatch('card/loadCards');
+            this.loading = false;
         },
         methods: {
             async deleteCard (card) {

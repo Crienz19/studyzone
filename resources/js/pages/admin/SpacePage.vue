@@ -6,7 +6,7 @@
             </v-alert>
         </v-col>
         <v-col cols="12">
-            <v-card>
+            <v-card :loading="loading" :disabled="loading">
                 <v-card-title>
                     Space List
                     <v-spacer></v-spacer>
@@ -59,7 +59,8 @@
                     daily_rate: 0,
                     weekly_rate: 0,
                     monthly_rate: 0
-                }
+                },
+                loading: false
             }
         },
         computed: {
@@ -68,7 +69,9 @@
             }
         },
         async mounted () {
+            this.loading = true;
             await this.$store.dispatch('space/loadSpaces');
+            this.loading = false;
         },
         methods: {
             async deleteSpace (item) {

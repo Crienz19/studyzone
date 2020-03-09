@@ -40,7 +40,7 @@
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card>
+            <v-card :loading="loading" :disabled="loading">
                 <v-card-title>
                     Overall Services
                     <v-spacer></v-spacer>
@@ -78,7 +78,8 @@
                     'Quantity': 'quantity', 
                     'Total': 'total',
                     'Date Transacted': 'created_at'
-                }
+                },
+                loading: false
             }
         },
         computed: {
@@ -87,7 +88,9 @@
             }
         },
         async mounted() {
-            await this.$store.dispatch('service/loadOverallServices')
+            this.loading = true;
+            await this.$store.dispatch('service/loadOverallServices');
+            this.loading = false;
         },
     }
 </script>
