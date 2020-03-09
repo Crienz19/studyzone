@@ -129,7 +129,7 @@ class ClientController extends Controller
                                 'type'      =>  'REGULAR'
                             ]);
 
-                            // event(new NewTransactionAdded($transaction->format()));
+                            event(new NewTransactionAdded($transaction->format()));
                             break;
 
                         case 'DP':
