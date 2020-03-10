@@ -41935,12 +41935,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "download-excel",
-                    {
-                      attrs: {
-                        data: _vm.filteredTransactions,
-                        fields: _vm.fields
-                      }
-                    },
+                    { attrs: { data: _vm.transactions, fields: _vm.fields } },
                     [
                       _vm._v(
                         "\n                    Export Report\n                "

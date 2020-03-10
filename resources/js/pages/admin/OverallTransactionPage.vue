@@ -44,7 +44,7 @@
                 <v-card-title>
                     <v-spacer></v-spacer>
                     <download-excel
-                        :data="filteredTransactions"
+                        :data="transactions"
                         :fields="fields"
                     >
                         Export Report
