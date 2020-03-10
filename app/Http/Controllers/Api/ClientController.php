@@ -167,7 +167,7 @@ class ClientController extends Controller
                 if ($subscription = Subscription::where('subscription_code', $request->input('subscription_code'))->first()) {
                     if ($subscription->user_id == $request->user()->id) {
                         $now = $dt->toDateTime();
-                        $expiry = Carbon::parse($subscription->date_expired)->toDateTime();
+                        $expiry = Carbon::parse($subscription->date_expired)->addDay()->toDateTime();
                         $diff = $now->diff($expiry);
 
                         if ($diff->format('%r%a') > 0) {
